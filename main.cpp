@@ -15,6 +15,15 @@ void printMap(vector<vector<int>> &map);
 vector<int> parseRow(string row);
 vector<vector<int>> readMapFile(string filename);
 
+enum class graphics {grass, tree};
+
+string VisualizeMap (graphics state) {
+    if (state == graphics::tree)
+        return "🌲 ";
+    else  
+        return "🟩 ";
+}
+
 void printMap(vector<vector<int>> &map) {
     for (auto i = map.begin(); i != map.end(); i++) {
         for (auto j = i->begin(); j != i->end(); j++) {
@@ -52,15 +61,7 @@ vector<int> parseRow(string row) {
 }
 
 int main () {
-    vector<vector<int>> map = {
-        {0,1,0,0,0,0},
-        {0,1,0,0,0,0},
-        {0,1,0,0,0,0},
-        {0,1,0,1,0,0},
-        {0,0,0,1,0,0},
-        {0,1,0,1,1,0}          
-    };
-
+    
     printMap(readMapFile("SampleMap.txt"));
 
 }
