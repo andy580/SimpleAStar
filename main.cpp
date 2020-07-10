@@ -10,34 +10,36 @@ using std::string;
 using std::ifstream;
 using std::istringstream;
 
-// Forward declarations
-void printMap(vector<vector<int>> &map); 
-vector<int> parseRow(string row);
-vector<vector<int>> readMapFile(string filename);
-
 enum class graphics {grass, tree};
+// Forward declarations
+void printMap(vector<vector<graphics>> &map); 
+vector<graphics> parseRow(string row);
+vector<vector<graphics>> readMapFile(string filename);
+string VisualizeMap (graphics state);
 
 string VisualizeMap (graphics state) {
     if (state == graphics::tree)
-        return "🌲 ";
+        // return "🌲 ";
+        return "1 ";
     else  
-        return "🟩 ";
+        // return "🟩 ";
+        return "0 ";
 }
 
-void printMap(vector<vector<int>> &map) {
+void printMap(vector<vector<graphics>> &map) {
     for (auto i = map.begin(); i != map.end(); i++) {
         for (auto j = i->begin(); j != i->end(); j++) {
-            cout << *j << " ";
+            cout << VisualizeMap(*j) << " ";
         }
         cout << "\n";
     }
 }
 // Overloading function to accept R-Value 
-void printMap(vector<vector<int>> &&map) {printMap(map);}
+void printMap(vector<vector<graphics>> &&map) {printMap(map);}
 
-vector<vector<int>> readMapFile(string filename) {
+vector<vector<graphics>> readMapFile(string filename) {
     ifstream mapFile;
-    vector<vector<int>> map;
+    vector<vector<graphics>> map;
     mapFile.open(filename);
     if(!mapFile)
         cout << "File not open";
@@ -50,13 +52,17 @@ vector<vector<int>> readMapFile(string filename) {
     return map;
 }
 
-vector<int> parseRow(string row) {
-    vector<int> mapRow;
+vector<graphics> parseRow(string row) {
+    vector<graphics> mapRow;
     istringstream mapRowIn(row); 
     char c; 
     int n; 
-    while (mapRowIn >> n >> c)
-        mapRow.push_back(n);
+    while (mapRowIn >> n >> c) {
+        if (n==0)
+            mapRow.push_back(graphics::grass);
+        else
+            mapRow.push_back(graphics::tree);
+    }
     return mapRow;
 }
 
