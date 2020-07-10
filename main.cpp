@@ -23,6 +23,8 @@ void printMap(vector<vector<int>> &map) {
         cout << "\n";
     }
 }
+// Overloading function to accept R-Value 
+void printMap(vector<vector<int>> &&map) {printMap(map);}
 
 vector<vector<int>> readMapFile(string filename) {
     ifstream mapFile;
@@ -59,8 +61,6 @@ int main () {
         {0,1,0,1,1,0}          
     };
 
-    // printMap(map);
-    readMapFile("SampleMap.txt");
-    // parseRow("0,1,0,1,0,1,0,");
+    printMap(readMapFile("SampleMap.txt"));
 
 }
