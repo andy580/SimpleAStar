@@ -2,11 +2,13 @@
 #include <vector>
 #include <fstream>
 #include <string>
+#include <sstream>
 
 using std::cout;
 using std::vector;
 using std::string;
 using std::ifstream;
+using std::istringstream;
 
 void printMap(vector<vector<int>> &map) {
     for (auto i = map.begin(); i != map.end(); i++) {
@@ -28,7 +30,16 @@ void readMapFile(string filename) {
             cout << row << "\n";
         }
     }
+}
 
+vector<int> parseRow(string row) {
+    vector<int> mapRow;
+    istringstream mapRowIn(row); 
+    char c; 
+    int n; 
+    while (mapRowIn >> n >> c)
+        mapRow.push_back(n);
+    return mapRow;
 }
 
 int main () {
@@ -42,7 +53,10 @@ int main () {
     };
 
     void printMap(vector<vector<int>> &map); 
+    void readMapFile(string filename);
+    vector<int> parseRow(string row);
     // printMap(map);
-    readMapFile("SampleMap.txt");
+    // readMapFile("SampleMap.txt");
+    parseRow("0,1,0,1,0,1,0,");
 
 }
