@@ -19,7 +19,14 @@ string VisualizeMap (state state);
 vector<vector<state>> Search (vector<vector<state>> &map, int start[2], int end[2]);
 int heuristic (int x1, int x2, int y1, int y2);
 void addToOpenNodes(int x,int y,int costValue, int heuristicValue, vector<vector<int>> &openNodes, vector<vector<state>> &map);
+bool compare (vector<int> node1, vector<int> node2);
 
+// Function takes the sum of the cost and heuristic value to compare
+bool compare(vector<int> node1, vector<int> node2) {
+    int sumValue1 = node1[2] + node1[3];
+    int sumValue2 = node2[2] + node2[3];
+    return sumValue1 > sumValue2;
+}
 
 void addToOpenNodes(int x,int y,int costValue, int heuristicValue, vector<vector<int>> &openNodes, vector<vector<state>> &map) {
     vector<int> node = {x,y,costValue, heuristicValue};
