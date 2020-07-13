@@ -16,6 +16,13 @@ void printMap(vector<vector<graphics>> &map);
 vector<graphics> parseRow(string row);
 vector<vector<graphics>> readMapFile(string filename);
 string VisualizeMap (graphics state);
+vector<vector<graphics>> Search (vector<vector<graphics>> &map, int start[2], int end[2]);
+
+vector<vector<graphics>> Search (vector<vector<graphics>> &map, int start[2], int end[2]){
+    cout << "No path found :(" << std::endl;
+    vector<vector<graphics>> path;
+    return path; 
+}
 
 string VisualizeMap (graphics state) {
     if (state == graphics::tree)
@@ -68,6 +75,11 @@ vector<graphics> parseRow(string row) {
 
 int main () {
     
-    printMap(readMapFile("SampleMap.txt"));
+    auto map = readMapFile("SampleMap.txt");
+    printMap(map);
+    int start[2] = {0,0};
+    int end[2] = {4,5};
+    auto solution = Search(map, start, end);
+    printMap(solution);
 
 }
