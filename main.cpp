@@ -17,6 +17,13 @@ vector<graphics> parseRow(string row);
 vector<vector<graphics>> readMapFile(string filename);
 string VisualizeMap (graphics state);
 vector<vector<graphics>> Search (vector<vector<graphics>> &map, int start[2], int end[2]);
+int heuristic (int x1, int x2, int y1, int y2);
+
+
+int heuristic (int x1, int x2, int y1, int y2) {
+    int manhatDist = abs(x2-x1) + abs(y2-y1); 
+    return manhatDist;
+}
 
 vector<vector<graphics>> Search (vector<vector<graphics>> &map, int start[2], int end[2]){
     cout << "No path found :(" << std::endl;
