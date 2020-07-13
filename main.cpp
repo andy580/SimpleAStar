@@ -18,6 +18,14 @@ vector<vector<graphics>> readMapFile(string filename);
 string VisualizeMap (graphics state);
 vector<vector<graphics>> Search (vector<vector<graphics>> &map, int start[2], int end[2]);
 int heuristic (int x1, int x2, int y1, int y2);
+void addToOpenNodes(int x,int y,int costValue, int heuristicValue, vector<vector<int>> &openNodes, vector<vector<graphics>> &map);
+
+
+void addToOpenNodes(int x,int y,int costValue, int heuristicValue, vector<vector<int>> &openNodes, vector<vector<graphics>> &map) {
+    vector<int> node = {x,y,costValue, heuristicValue};
+    openNodes.push_back(node);
+    
+}
 
 
 int heuristic (int x1, int x2, int y1, int y2) {
