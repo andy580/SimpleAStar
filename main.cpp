@@ -3,6 +3,7 @@
 #include <fstream>
 #include <string>
 #include <sstream>
+#include <algorithm>
 
 using std::cout;
 using std::vector;
@@ -20,6 +21,13 @@ vector<vector<state>> Search (vector<vector<state>> &map, int start[2], int end[
 int heuristic (int x1, int x2, int y1, int y2);
 void addToOpenNodes(int x,int y,int costValue, int heuristicValue, vector<vector<int>> &openNodes, vector<vector<state>> &map);
 bool compare (vector<int> node1, vector<int> node2);
+void cellSort (vector<vector<int>> &openNodes);
+
+
+// Function to sort nodes in a list based on sum of cost and heuristic value
+void cellSort (vector<vector<int>> &openNodes) {
+    sort(openNodes.begin(), openNodes.end(), compare);
+}
 
 // Function takes the sum of the cost and heuristic value to compare
 bool compare(vector<int> node1, vector<int> node2) {
