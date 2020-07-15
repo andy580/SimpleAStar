@@ -22,7 +22,18 @@ int heuristic (int x1, int x2, int y1, int y2);
 void addToOpenNodes(int x,int y,int costValue, int heuristicValue, vector<vector<int>> &openNodes, vector<vector<state>> &map);
 bool compare (vector<int> node1, vector<int> node2);
 void cellSort (vector<vector<int>> &openNodes);
+bool checkValidCell(int x, int y, vector<vector<state>> &map);
 
+
+bool checkValidCell(int x, int y, vector<vector<state>> &map) {
+    if (y < map.size() && x < map[y].size() && x>=0 && y>=0) {
+        return (map[x][y] == state::grass);
+    } else
+    {
+        return false;
+    }
+    
+}
 
 // Function to sort nodes in a list based on sum of cost and heuristic value
 void cellSort (vector<vector<int>> &openNodes) {
