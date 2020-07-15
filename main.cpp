@@ -11,7 +11,7 @@ using std::string;
 using std::ifstream;
 using std::istringstream;
 
-enum class state {grass, tree, visited};
+enum class state {grass, tree, visited, path};
 // Forward declarations
 void printMap(vector<vector<state>> &map); 
 vector<state> parseRow(string row);
@@ -49,6 +49,30 @@ int heuristic (int x1, int x2, int y1, int y2) {
 }
 
 vector<vector<state>> Search (vector<vector<state>> &map, int start[2], int end[2]){
+    
+    vector<vector<int>> openNodes;
+
+    int x = start[0];
+    int y = start[1];
+    int costValue = 0;
+    int heuristicValue = heuristic(x,y,end[0],end[1]);
+    addToOpenNodes(x,y,costValue,heuristicValue,openNodes,map);
+
+    while (openNodes.size() > 0) {
+        cellSort(openNodes);
+        auto currentNode = openNodes.back();
+        openNodes.pop_back();
+        x = currentNode[0];
+        y = currentNode[1];
+        map[x][y] = state::path;
+
+        if (x == end[0] && y == end[1]) {
+            return map;
+        }
+
+        // function to search adjacent nodes; 
+    }
+    
     cout << "No path found :(" << std::endl;
     vector<vector<state>> path;
     return path; 
