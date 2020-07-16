@@ -12,6 +12,14 @@ using std::ifstream;
 using std::istringstream;
 
 enum class state {grass, tree, visited, path};
+const int directions[4][2]
+{
+    {1,0},
+    {0,1},
+    {-1,0},
+    {0,-1}
+};
+    
 // Forward declarations
 void printMap(vector<vector<state>> &map); 
 vector<state> parseRow(string row);
@@ -23,6 +31,25 @@ void addToOpenNodes(int x,int y,int costValue, int heuristicValue, vector<vector
 bool compare (vector<int> node1, vector<int> node2);
 void cellSort (vector<vector<int>> &openNodes);
 bool checkValidCell(int x, int y, vector<vector<state>> &map);
+void expandAdjCells(vector<int> &currNode, vector<vector<int>> &openNodes, vector<vector<state>> &map, int end[2]);
+
+
+void expandAdjCells(vector<int> &currNode, vector<vector<int>> &openNodes, vector<vector<state>> &map, int end[2]){
+    int x = currNode[0];
+    int y = currNode[1];
+    int costValue = currNode[2];
+    int heuristicValue = currNode[3];
+
+    for (int i = 0; i < sizeof(directions); i++) {
+        int x2 = x + directions[i][0];
+        int y2 = y + directions[i][1];
+        if (checkValidCell( x2, y2, map)){
+            int costValue2 = costValue+1;
+            int heuristicValue2 = heuristic(x,y,x2,y2);
+            addToOpenNodes(x2,y2,costValue2,heuristicValue2,openNodes,map);     
+        }
+    }   
+}
 
 
 bool checkValidCell(int x, int y, vector<vector<state>> &map) {
@@ -82,6 +109,7 @@ vector<vector<state>> Search (vector<vector<state>> &map, int start[2], int end[
         }
 
         // function to search adjacent nodes; 
+        expandAdjCells(currentNode, openNodes, map, end);
     }
     
     cout << "No path found :(" << std::endl;
@@ -143,7 +171,7 @@ int main () {
     auto map = readMapFile("SampleMap.txt");
     printMap(map);
     int start[2] = {0,0};
-    int end[2] = {4,5};
+    int end[2] = {5,5};
     auto solution = Search(map, start, end);
     printMap(solution);
 
