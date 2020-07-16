@@ -118,12 +118,14 @@ vector<vector<state>> Search (vector<vector<state>> &map, int start[2], int end[
 }
 
 string VisualizeMap (state state) {
-    if (state == state::tree)
-        // return "🌲 ";
-        return "1 ";
-    else  
-        // return "🟩 ";
-        return "0 ";
+    switch(state) {
+        // grass, tree, visited, path
+        case state::grass : return "0 ";
+        case state::tree : return "1 ";
+        case state::path : return "- ";
+        case state::visited : return "o ";
+        default: return "0 ";
+    }
 }
 
 void printMap(vector<vector<state>> &map) {
@@ -173,6 +175,7 @@ int main () {
     int start[2] = {0,0};
     int end[2] = {5,5};
     auto solution = Search(map, start, end);
+    cout << ("---------------") << std::endl;
     printMap(solution);
 
 }
