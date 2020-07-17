@@ -7,6 +7,7 @@
 
 using std::string;
 using std::vector;
+using std::cout;
 
 
 enum class state {grass, tree, visited, path};

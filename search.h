@@ -2,6 +2,7 @@
 #define SEARCH_H
 
 #include <vector>
+#include <algorithm>
 #include "display.h"
 
 using std::vector;
