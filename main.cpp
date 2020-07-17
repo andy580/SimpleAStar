@@ -22,8 +22,7 @@ const int directions[4][2]
 };
     
 // Forward declarations
-vector<state> parseRow(string row);
-vector<vector<state>> readMapFile(string filename);
+
 vector<vector<state>> Search (vector<vector<state>> &map, int start[2], int end[2]);
 int heuristic (int x1, int x2, int y1, int y2);
 void addToOpenNodes(int x,int y,int costValue, int heuristicValue, vector<vector<int>> &openNodes, vector<vector<state>> &map);
