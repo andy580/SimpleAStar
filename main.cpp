@@ -4,6 +4,7 @@
 #include <string>
 #include <sstream>
 #include <algorithm>
+#include "display.h"
 
 using std::cout;
 using std::vector;
@@ -11,7 +12,7 @@ using std::string;
 using std::ifstream;
 using std::istringstream;
 
-enum class state {grass, tree, visited, path};
+
 const int directions[4][2]
 {
     {1,0},
@@ -21,10 +22,8 @@ const int directions[4][2]
 };
     
 // Forward declarations
-void printMap(vector<vector<state>> &map); 
 vector<state> parseRow(string row);
 vector<vector<state>> readMapFile(string filename);
-string VisualizeMap (state state);
 vector<vector<state>> Search (vector<vector<state>> &map, int start[2], int end[2]);
 int heuristic (int x1, int x2, int y1, int y2);
 void addToOpenNodes(int x,int y,int costValue, int heuristicValue, vector<vector<int>> &openNodes, vector<vector<state>> &map);
