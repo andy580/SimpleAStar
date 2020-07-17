@@ -4,7 +4,10 @@
 #include <string>
 #include <sstream>
 #include <algorithm>
+
 #include "display.h"
+#include "parse.h"
+#include "search.h"
 
 using std::cout;
 using std::vector;
@@ -12,24 +15,9 @@ using std::string;
 using std::ifstream;
 using std::istringstream;
 
-
-const int directions[4][2]
-{
-    {1,0},
-    {0,1},
-    {-1,0},
-    {0,-1}
-};
-    
+  
 // Forward declarations
 
-vector<vector<state>> Search (vector<vector<state>> &map, int start[2], int end[2]);
-int heuristic (int x1, int x2, int y1, int y2);
-void addToOpenNodes(int x,int y,int costValue, int heuristicValue, vector<vector<int>> &openNodes, vector<vector<state>> &map);
-bool compare (vector<int> node1, vector<int> node2);
-void cellSort (vector<vector<int>> &openNodes);
-bool checkValidCell(int x, int y, vector<vector<state>> &map);
-void expandAdjCells(vector<int> &currNode, vector<vector<int>> &openNodes, vector<vector<state>> &map, int end[2]);
 
 
 void expandAdjCells(vector<int> &currNode, vector<vector<int>> &openNodes, vector<vector<state>> &map, int end[2]){
